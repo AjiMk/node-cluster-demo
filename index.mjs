@@ -1,48 +1,20 @@
-import {availableParallelism} from "os";
 import cluster from "cluster";
 import http from "http";
+import {cpus} from "os";
+import app from "./app.mjs";
 
-if(cluster.isMaster) {
-    for(let i=0; i<availableParallelism();i++) {
-        const worker = cluster.fork();
+if (cluster.isMaster) {
+  console.log(`Master ${process.pid} is running`);
 
-        worker.on("disconnect", () => {
-            console.log("disconnected!");
-        })
-
-        worker.on("error", (error) => {
-            console.log("Worker error event!");
-            console.log(error);
-        })
-
-        worker.on('exit', (code, signal) => {
-            if (signal) {
-              console.log(`worker was killed by signal: ${signal}`);
-            } else if (code !== 0) {
-              console.log(`worker exited with error code: ${code}`);
-            } else {
-              console.log('worker success!');
-            }
-        });
-
-        worker.on("listening", (address) => {
-            console.log(process.pid);
-        })
-
-        worker.on("message", (msg)=> {
-            console.log(msg)
-        })
-
-        worker.on("online", () => {
-            console.log(`Worker online ${process.pid}`)
-        })
-    }
-
-}else{
-    http.createServer((req, res) => {
-        const worker = cluster.worker;
-        res.end(`worker_id:${cluster.worker.id}`);
-    }).listen("8080");
+  for (let i = 0; i < cpus().length; i++) {
+    cluster.fork();
+  }
+  
+  // Listen for dying workers and fork a new one
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`Worker ${worker.process.pid} died`);
+    cluster.fork();
+  });
+} else {
+    app.listen(3000);
 }
-
-
