@@ -1,0 +1,64 @@
+<style>
+    h2 {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.table-bordered {
+  border: 1px solid #ddd !important;
+}
+
+table caption {
+	padding: .5em 0;
+}
+
+@media screen and (max-width: 767px) {
+  table caption {
+    display: none;
+  }
+}
+
+.p {
+  text-align: center;
+  padding-top: 140px;
+  font-size: 14px;
+}
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<h2>Node clusters</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-responsive" data-pattern="priority-columns">
+        <table summary="This table shows how to create responsive tables using RWD-Table-Patterns' functionality" class="table table-bordered table-hover">
+          <caption class="text-center">Node cluster</caption>
+          <thead>
+            <tr>
+              <th>Worker Id</th>
+              <th data-priority="1">Process Id</th>
+              <th data-priority="2">Disconnect</th>
+              <th data-priority="3">Kill</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% allWorkerData.forEach(function(worker) { %>
+              <tr>
+                <td><%= worker.workerId%></td>
+                <td><%= worker.pid%></td>
+                <td><button class="btn btn-secondary">Disconnect</button></td>
+                <td><button class="btn btn-danger">Kill</button></td>
+              </tr>
+            <% }); %>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5" class="text-center">Data retrieved from <a href="http://www.infoplease.com/ipa/A0855611.html" target="_blank">infoplease</a> and <a href="http://www.worldometers.info/world-population/population-by-country/" target="_blank">worldometers</a>.</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div><!--end of .table-responsive-->
+    </div>
+  </div>
+</div>
+
+<p class="p">Demo by George Martsoukos. <a href="http://www.sitepoint.com/responsive-data-tables-comprehensive-list-solutions" target="_blank">See article</a>.</p>
