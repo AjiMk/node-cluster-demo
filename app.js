@@ -1,5 +1,5 @@
 import express from "express";
-import {fibonacci} from "./heavyComputation.mjs";   
+import {fibonacci} from "./heavyComputation.js";   
 import cluster from "cluster";
 import path from "path";
 import { fileURLToPath } from 'url';

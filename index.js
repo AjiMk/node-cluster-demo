@@ -1,7 +1,7 @@
 import cluster from "cluster";
 import net from "net";
 import express from "express";
-import app from "./app.mjs";
+import app from "./app.js";
 import { cpus } from "os";
 
 if(cluster.isPrimary) {
