@@ -15,8 +15,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/", (req, res) => {
-    console.log(`landing page: ${process.pid}`)
-    res.send("Landing page")
+    return res.render("landing")
 })
 
 app.get("/admin", (req, res) => {
