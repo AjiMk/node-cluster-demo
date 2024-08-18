@@ -4,12 +4,14 @@ import cluster from "cluster";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import bodyParser from "body-parser";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
 app.set("view engine","ejs")
+app.use(bodyParser.json());
 
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -29,6 +31,14 @@ app.get("/", (req, res) => {
         return res.render("dashboard");
     }
 })
+
+app.post("/process-kill", (req, res) => {
+    if(cluster.isMaster) {
+        // console.log(cluster)
+        console.log(req.body)
+    }
+    return res.end();
+});
 
 // Define routes and middleware
 app.get('/heavy', (req, res) => {

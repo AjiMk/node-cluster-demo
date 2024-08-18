@@ -70,12 +70,16 @@
           </thead>
           <tbody id="worker-table-body">
             <% allWorkerData.forEach(function(worker) { %>
-              <tr>
-                <td><%= worker.workerId %></td>
-                <td><%= worker.pid %></td>
-                <td><button class="btn btn-secondary">Disconnect</button></td>
-                <td><button class="btn btn-danger">Kill</button></td>
-              </tr>
+              <form onsubmit="return false;">
+                <tr>
+                    <input type="hidden" name="id" value=`${worker.pid}`>
+                    <td><%= worker.workerId %></td>
+                    <td><%= worker.pid %></td>
+                    <td><button class="btn btn-secondary">Disconnect</button></td>
+                    <td><button class="btn btn-danger" hx-post="process-kill" hx-swap="none">Kill</button></td>
+                </tr>
+              </form>
+
             <% }); %>
           </tbody>
           <tfoot>
@@ -87,7 +91,7 @@
     </div>
   </div>
 </div>
-
+<script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 <script>
   document.getElementById('filter-input').addEventListener('input', function() {
     const filterValue = this.value.toLowerCase();
