@@ -1,37 +1,65 @@
 <style>
-    h2 {
-  text-align: center;
-  padding: 20px 0;
-}
-
-.table-bordered {
-  border: 1px solid #ddd !important;
-}
-
-table caption {
-	padding: .5em 0;
-}
-
-@media screen and (max-width: 767px) {
-  table caption {
-    display: none;
+  h2 {
+    text-align: center;
+    padding: 20px 0;
   }
-}
 
-.p {
-  text-align: center;
-  padding-top: 140px;
-  font-size: 14px;
-}
+  .table-bordered {
+    border: 1px solid #ddd !important;
+  }
+
+  table caption {
+    padding: .5em 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    table caption {
+      display: none;
+    }
+  }
+
+  .p {
+    text-align: center;
+    padding-top: 140px;
+    font-size: 14px;
+  }
+
+  .table-responsive {
+    height: 600px; /* Adjust this height as needed */
+    overflow-y: auto;
+  }
+
+  .filter-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .filter-container input {
+    padding: 5px;
+    width: 200px;
+  }
+
+  .total-count {
+    font-weight: bold;
+  }
 </style>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<h2>Node clusters</h2>
+
+<h2>Node Clusters</h2>
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
+      <!-- Filter and Total Count Section -->
+      <div class="filter-container">
+        <input type="text" id="filter-input" placeholder="Filter by Worker ID or Process ID">
+        <div class="total-count">Total Workers: <span id="total-workers"><%= allWorkerData.length %></span></div>
+      </div>
+      <!-- Table Section -->
       <div class="table-responsive" data-pattern="priority-columns">
         <table summary="This table shows how to create responsive tables using RWD-Table-Patterns' functionality" class="table table-bordered table-hover">
-          <caption class="text-center">Node cluster</caption>
+          <caption class="text-center"></caption>
           <thead>
             <tr>
               <th>Worker Id</th>
@@ -40,11 +68,11 @@ table caption {
               <th data-priority="3">Kill</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="worker-table-body">
             <% allWorkerData.forEach(function(worker) { %>
               <tr>
-                <td><%= worker.workerId%></td>
-                <td><%= worker.pid%></td>
+                <td><%= worker.workerId %></td>
+                <td><%= worker.pid %></td>
                 <td><button class="btn btn-secondary">Disconnect</button></td>
                 <td><button class="btn btn-danger">Kill</button></td>
               </tr>
@@ -52,13 +80,33 @@ table caption {
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="5" class="text-center">Data retrieved from <a href="http://www.infoplease.com/ipa/A0855611.html" target="_blank">infoplease</a> and <a href="http://www.worldometers.info/world-population/population-by-country/" target="_blank">worldometers</a>.</td>
             </tr>
           </tfoot>
         </table>
-      </div><!--end of .table-responsive-->
+      </div>
     </div>
   </div>
 </div>
 
-<p class="p">Demo by George Martsoukos. <a href="http://www.sitepoint.com/responsive-data-tables-comprehensive-list-solutions" target="_blank">See article</a>.</p>
+<script>
+  document.getElementById('filter-input').addEventListener('input', function() {
+    const filterValue = this.value.toLowerCase();
+    const rows = document.querySelectorAll('#worker-table-body tr');
+    let visibleRows = 0;
+
+    rows.forEach(row => {
+      const workerId = row.cells[0].textContent.toLowerCase();
+      const processId = row.cells[1].textContent.toLowerCase();
+
+      if (workerId.includes(filterValue) || processId.includes(filterValue)) {
+        row.style.display = '';
+        visibleRows++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+
+    // Update the total number of visible workers
+    document.getElementById('total-workers').textContent = visibleRows;
+  });
+</script>
