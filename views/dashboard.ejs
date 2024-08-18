@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operations Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h2 {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .operations-container {
+      margin: 30px auto;
+      max-width: 800px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .operation-item {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .operation-item h4 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .operation-item p {
+      margin-bottom: 10px;
+    }
+
+    .operation-item a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #337ab7;
+    }
+
+    .operation-item a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h2>Operations Dashboard</h2>
+  <div class="container operations-container">
+    <div class="operation-item">
+      <h4>View Node Clusters</h4>
+      <p>Monitor and manage all active node clusters in real time.</p>
+      <a href="/" onclick="javascript:event.target.port=3000">Go to Node Clusters &raquo;</a>
+    </div>
+    <!-- <div class="operation-item">
+      <h4>Manage Workers</h4>
+      <p>Control and administer workers, including disconnect and kill operations.</p>
+      <a href="/" onclick="javascript:event.target.port=3000">Go to Manage Workers &raquo;</a>
+    </div>
+    <div class="operation-item">
+      <h4>Performance Metrics</h4>
+      <p>Analyze performance metrics of your application clusters.</p>
+      <a href="/performance-metrics">Go to Performance Metrics &raquo;</a>
+    </div>
+    <div class="operation-item">
+      <h4>System Logs</h4>
+      <p>View detailed logs and audit trails of system operations.</p>
+      <a href="/system-logs">Go to System Logs &raquo;</a>
+    </div> -->
+  </div>
+</body>
+</html>

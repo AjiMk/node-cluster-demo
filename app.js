@@ -15,20 +15,20 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/", (req, res) => {
-    return res.render("landing")
+    if(cluster.isMaster) {
+        const workers = Object.values(cluster.workers);
+        const allWorkerData = workers.map(worker=> {
+            return {
+                workerId: worker.id,
+                pid: worker.process.pid,
+            }
+        })
+
+        return res.render("admin", {allWorkerData: allWorkerData});
+    }else{
+        return res.render("dashboard");
+    }
 })
-
-app.get("/admin", (req, res) => {
-    const workers = Object.values(cluster.workers);
-    const allWorkerData = workers.map(worker=> {
-        return {
-            workerId: worker.id,
-            pid: worker.process.pid,
-        }
-    })
-
-    return res.render("admin", {allWorkerData: allWorkerData});
-});
 
 // Define routes and middleware
 app.get('/heavy', (req, res) => {
