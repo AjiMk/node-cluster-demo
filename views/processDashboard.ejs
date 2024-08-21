@@ -1,0 +1,52 @@
+<style>
+    h2 {
+      text-align: center;
+      padding: 20px 0;
+    }
+  
+    .table-bordered {
+      border: 1px solid #ddd !important;
+    }
+  
+    table caption {
+      padding: .5em 0;
+    }
+  
+    @media screen and (max-width: 767px) {
+      table caption {
+        display: none;
+      }
+    }
+  
+    .p {
+      text-align: center;
+      padding-top: 140px;
+      font-size: 14px;
+    }
+  
+    .table-responsive {
+      height: 600px; /* Adjust this height as needed */
+      overflow-y: auto;
+    }
+  
+    .filter-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+  
+    .filter-container input {
+      padding: 5px;
+      width: 200px;
+    }
+  
+    .total-count {
+      font-weight: bold;
+    }
+  </style>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+  <h2>Node Clusters</h2>
+  <div class="container" hx-get="/process-list" hx-trigger="load"></div>
+  <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>

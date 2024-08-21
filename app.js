@@ -1,5 +1,5 @@
 import express from "express";
-import {fibonacci} from "./heavyComputation.js";   
+import { fibonacci } from "./heavyComputation.js";
 import cluster from "cluster";
 import path from "path";
 import { fileURLToPath } from 'url';
@@ -10,45 +10,54 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-app.set("view engine","ejs")
-app.use(bodyParser.json());
+app.set("view engine", "ejs");
 
-app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, 'public')));
+// Middleware setup (consider grouping related middleware)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set('views', path.resolve(__dirname, 'views'));
+app.use(express.static(path.resolve(__dirname, 'public')));
+
+const getAllProcessList = (req, res) => {
+    const workers = Object.values(cluster.workers);
+
+    const allWorkerData = workers
+        .filter(worker=> worker.process.killed===false)
+        .map(worker => ({
+            workerId: worker.id,
+            pid: worker.process.pid,
+        }));
+
+    res.render("allProcessList", { allWorkerData }); 
+};
 
 app.get("/", (req, res) => {
-    if(cluster.isMaster) {
-        const workers = Object.values(cluster.workers);
-        const allWorkerData = workers.map(worker=> {
-            return {
-                workerId: worker.id,
-                pid: worker.process.pid,
-            }
-        })
-
-        return res.render("admin", {allWorkerData: allWorkerData});
-    }else{
-        return res.render("dashboard");
-    }
-})
-
-app.post("/process-kill", (req, res) => {
-    if(cluster.isMaster) {
-        // console.log(cluster)
-        console.log(req.body)
-    }
-    return res.end();
+    res.render(cluster.isMaster ? "processDashboard" : "dashboard");
 });
 
-// Define routes and middleware
+app.get("/process-list", getAllProcessList);
+
+app.post("/process-kill", (req, res, next) => {
+    if (cluster.isMaster) {
+        const pid = Number(req.body.pid || 0);
+        const singleWorker = Object.values(cluster.workers).find(worker => worker.process.pid === pid);
+
+        if (singleWorker) {
+            singleWorker.kill();
+        }
+
+        next();
+    }else{
+        return res.status(401).send();
+    }
+
+}, getAllProcessList);
+
 app.get('/heavy', (req, res) => {
-    for(let i=0;i<10;i++) {
+    for (let i = 0; i < 10; i++) {
         fibonacci(10000);
     }
-    
-  res.send('Hello World!');
+    res.send('Hello World!');
 });
-
-
 
 export default app;

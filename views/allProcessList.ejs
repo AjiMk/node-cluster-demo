@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-xs-12">
+    <!-- Filter and Total Count Section -->
+    <div class="filter-container">
+      <input type="text" id="filter-input" placeholder="Filter by Worker ID or Process ID">
+      <div class="total-count">Total Workers: <span id="total-workers"><%= allWorkerData.length %></span></div>
+    </div>
+    <!-- Table Section -->
+    <div class="table-responsive" data-pattern="priority-columns">
+      <table summary="This table shows how to create responsive tables using RWD-Table-Patterns' functionality" class="table table-bordered table-hover">
+        <caption class="text-center"></caption>
+        <thead>
+          <tr>
+            <th>Worker Id</th>
+            <th data-priority="1">Process Id</th>
+            <th data-priority="2">Disconnect</th>
+            <th data-priority="3">Kill</th>
+          </tr>
+        </thead>
+        <tbody id="worker-table-body">
+            <% allWorkerData.forEach(function(worker) { %>
+                <tr>
+                    <input type="hidden" name="id" value=`${worker.pid}`>
+                    <td><%= worker.workerId %></td>
+                    <td><%= worker.pid %></td>
+                    <td><button class="btn btn-secondary">Disconnect</button></td>
+                    <td><button class="btn btn-danger"  hx-vals='{"pid": <%= worker.pid %>}' hx-post="process-kill" hx-target=".container">Kill</button></td>
+                </tr>
+            <% }); %>
+        </tbody>
+        <tfoot>
+          <tr>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('filter-input').addEventListener('input', function() {
+    const filterValue = this.value.toLowerCase();
+    const rows = document.querySelectorAll('#worker-table-body tr');
+    let visibleRows = 0;
+
+    rows.forEach(row => {
+      const workerId = row.cells[0].textContent.toLowerCase();
+      const processId = row.cells[1].textContent.toLowerCase();
+
+      if (workerId.includes(filterValue) || processId.includes(filterValue)) {
+        row.style.display = '';
+        visibleRows++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+
+    // Update the total number of visible workers
+    document.getElementById('total-workers').textContent = visibleRows;
+  });
+</script>
