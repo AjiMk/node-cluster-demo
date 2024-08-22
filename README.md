@@ -1,38 +1,58 @@
-### Welcome to My Personal Node Cluster Learning Repository!
 
-In this repository, I'll be documenting my journey and learning experience as I delve into building and managing a personal Node.js cluster. Whether you're a fellow enthusiast, a seasoned developer, or just curious about clustering in Node.js, feel free to explore, learn, and contribute!
+# Node.js Cluster Dashboard
 
-### Table Of Contents
-1. Introduction
-2. Setup
-3. Basic Concepts
-4. Resources
-5. Contributing
-6. License
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node.js CI](https://github.com/your-username/your-repo/actions/workflows/node.js.yml/badge.svg)](https://github.com/your-username/your-repo/actions/workflows/node.js.yml)
 
-#### Introduction
-Node.js clustering is a technique used to take advantage of multi-core systems by creating multiple instances of a Node.js process to handle incoming requests. This allows for better utilization of system resources and improved application performance.
+<div align="center">
+  <img src="./images/operation-dashboard.png" alt="Dashboard Screenshot 1" width="600">
+</div>
 
-In this repository, I aim to explore various aspects of setting up, configuring, and managing a Node.js cluster for personal learning purposes. I'll cover topics such as clustering strategies, load balancing, fault tolerance, and more.
+A powerful and user-friendly Node.js cluster dashboard for visualizing and managing cluster processes. Built with a focus on intuitive UX using htmx and jQuery.
 
-#### Setup
-To follow along with my learning journey, you'll need to have Node.js installed on your system. You can download and install Node.js from the official website.
+## Features
 
-Once you have Node.js installed, clone this repository to your local machine using the following command:
+* **Real-time Monitoring:**  View all active cluster processes and their status.
+* **Process Management:**  Kill or disconnect processes directly from the dashboard.
+* **htmx & jQuery Integration:**  Smooth, interactive user experience without full page reloads.
+* **Responsive Design:**  Works seamlessly on various screen sizes.
+
+## Installation
+
+1. **Clone the repository:** 
+   ```bash
+   git clone git@github.com:AjiMk/node-cluster-demo.git
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   cd node-cluster-demo
+   npm install
+   ```
+
+3. **Start the server:**
+   ```bash
+   npm start
+   ```
+
+4. **Access the dashboard:** Open your browser and navigate to `http://localhost:3001`.
 
 
-```bash
-git clone git@github.com:AjiMk/node-cluster-example.git
-```
+## Technologies Used
 
-#### Basic Concepts
-- Node.js Cluster Module: Understanding the built-in cluster module in Node.js for creating child processes.
+* Node.js
+* express.js
+* htmx
+* jQuery
 
+## Upcoming Features
 
+* **Resource Monitoring:** CPU and memory usage visualization.
 
-#### Resources
-Here are some resources that I've found helpful during my learning journey:
+## Contributing
 
-[Cluster module documentation](https://nodejs.org/api/cluster.html "Cluster module documentation")
-#### Contributing
-If you have any suggestions, improvements, or additional resources related to Node.js clustering, feel free to open an issue or submit a pull request. Your contributions are highly appreciated!
+Contributions are welcome! Please read the [CONTRIBUTING.md](./CONTRIBUTING.md) file for guidelines.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
