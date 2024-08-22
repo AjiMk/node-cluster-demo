@@ -1,8 +1,7 @@
 
 # Node.js Cluster Dashboard
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Node.js CI](https://github.com/your-username/your-repo/actions/workflows/node.js.yml/badge.svg)](https://github.com/your-username/your-repo/actions/workflows/node.js.yml)
+<!-- [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) -->
 
 <div align="center">
   <img src="./images/operation-dashboard.png" alt="Dashboard Screenshot 1" width="600">
@@ -16,6 +15,16 @@ A powerful and user-friendly Node.js cluster dashboard for visualizing and manag
 * **Process Management:**  Kill or disconnect processes directly from the dashboard.
 * **htmx & jQuery Integration:**  Smooth, interactive user experience without full page reloads.
 * **Responsive Design:**  Works seamlessly on various screen sizes.
+
+## Screenshots
+
+<div align="center">
+  <img src="./images/operation-dashboard.png" alt="Operation dashboard" width="600">
+  <p>Operation dashboard</p>
+
+  <img src="./images/all-cluster-processors.png" alt="All cluster processors" width="600">
+  <p>All cluster processors</p>
+</div>
 
 ## Installation
 
