@@ -1,11 +1,8 @@
 
 # Node.js Cluster Dashboard
 
-<!-- [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) -->
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-<div align="center">
-  <img src="./images/operation-dashboard.png" alt="Dashboard Screenshot 1" width="600">
-</div>
 
 A powerful and user-friendly Node.js cluster dashboard for visualizing and managing cluster processes. Built with a focus on intuitive UX using htmx and jQuery.
 
@@ -58,9 +55,6 @@ A powerful and user-friendly Node.js cluster dashboard for visualizing and manag
 
 * **Resource Monitoring:** CPU and memory usage visualization.
 
-## Contributing
-
-Contributions are welcome! Please read the [CONTRIBUTING.md](./CONTRIBUTING.md) file for guidelines.
 
 ## License
 
