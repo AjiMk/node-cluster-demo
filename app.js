@@ -53,6 +53,24 @@ app.post("/process-kill", (req, res, next) => {
 
 }, getAllProcessList);
 
+app.post("/process-disconnect", (req, res, next) => {
+    if (cluster.isMaster) {
+        const pid = Number(req.body.pid || 0);
+        const singleWorker = Object.values(cluster.workers).find(worker => worker.process.pid === pid);
+
+        console.log(pid)
+
+        if (singleWorker) {
+            singleWorker.disconnect();
+        }
+
+        next();
+    }else{
+        return res.status(401).send();
+    }
+
+}, getAllProcessList);
+
 app.get('/heavy', (req, res) => {
     for (let i = 0; i < 10; i++) {
         fibonacci(10000);

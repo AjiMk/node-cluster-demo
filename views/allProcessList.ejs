@@ -23,7 +23,7 @@
                     <input type="hidden" name="id" value=`${worker.pid}`>
                     <td><%= worker.workerId %></td>
                     <td><%= worker.pid %></td>
-                    <td><button class="btn btn-secondary">Disconnect</button></td>
+                    <td><button class="btn btn-secondary" hx-vals='{"pid": <%= worker.pid %>}' hx-post="process-disconnect" hx-target=".container">Disconnect</button></td>
                     <td><button class="btn btn-danger"  hx-vals='{"pid": <%= worker.pid %>}' hx-post="process-kill" hx-target=".container">Kill</button></td>
                 </tr>
             <% }); %>
